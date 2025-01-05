@@ -16,10 +16,32 @@ const board = document.getElementById('board')
 const winningMessageElement = document.getElementById('winningMessage')
 const winningMessageTextElement = document.querySelector('[winning-message-text]')
 const restartButton = document.getElementById("restartButton")
+const timer = document.getElementById('timer')
 
 let oTurn
 
 startGame()
+
+var time_amount = 3
+
+var time = setInterval(() => {
+    if(time_amount == 0) {
+        timer.innerText = `Player ${oTurn ? "X" : "O"} 's Turn!`
+        swapTurns()
+        setBoardHoverClass()
+    }else{
+        if(time_amount < 10){
+            time_amount = 0 + '' + time_amount
+        }
+
+        timer.innerText = '00:' + time_amount
+        time_amount -= 1;
+    }
+}, 1000)
+
+function stopTime(){
+    clearInterval(time)
+}
 
 restartButton.addEventListener('click', startGame)
 
@@ -46,6 +68,7 @@ function handleClick(e){
     // check for a win
     if (checkWin(currentClass)){
         endGame(false)
+        stopTime()
     } else if (isDraw()){
         // check for a draw
         endGame(true)
@@ -59,6 +82,7 @@ function handleClick(e){
 
 function endGame(draw){
     if(draw){
+        stopTime()
         winningMessageTextElement.innerText = "Draw!"
     }else{
         winningMessageTextElement.innerText = `Player ${oTurn ? "O" : "X"} Wins!`
@@ -75,10 +99,12 @@ function isDraw(){
 
 function placeMark(cell, currentClass){
     cell.classList.add(currentClass)
+    time_amount = 3;
 }
 
 function swapTurns(){
     oTurn = !oTurn
+    time_amount = 3;
 }
 
 function setBoardHoverClass(){

@@ -165,3 +165,12 @@ border-bottom: none;
 .winning-message.show {
     display:flex;
 }
+
+.timer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 3rem;
+    font-family: "Comic Sans MS";
+    color: rgb(242, 51, 172);
+}
