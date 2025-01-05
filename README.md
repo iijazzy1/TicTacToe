@@ -6,3 +6,4 @@ A game that requires 2 players each being X or O. By taking turns, the player ha
 
 # Resources Used
 Used a youtube video by Web Dev Simplified to help create the tic tac toe game and then also implemented the timer part to it.
+Youtube link: https://www.youtube.com/watch?v=Y-GkMjUZsmM&ab_channel=WebDevSimplified
