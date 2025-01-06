@@ -28,6 +28,27 @@ body {
     margin: 0;
 }
 
+.start-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.start-screen button{
+    font-size: 1rem;
+    background-color: rgb(252, 183, 249);
+    border: 2px solid rgb(241, 150, 208);
+    padding: .25em .5em;
+    cursor: pointer;
+    color: rgb(242, 51, 172);
+}
+
+.start-screen button:hover {
+    background-color: rgba(252, 183, 248, 0.50);
+    color: rgba(242, 51, 172, 0.40);
+}
+
 .board{
     width: 100vw;
     height: 80vh;
@@ -174,3 +195,4 @@ border-bottom: none;
     font-family: "Comic Sans MS";
     color: rgb(242, 51, 172);
 }
+

@@ -11,6 +11,8 @@ const WINS = [
     [2, 4, 6]
 ]
 
+const startButton = document.getElementById("startButton")
+const startScreen = document.getElementById("startScreen")
 const cellElements = document.querySelectorAll('[data-cell]')
 const board = document.getElementById('board')
 const winningMessageElement = document.getElementById('winningMessage')
@@ -18,34 +20,44 @@ const winningMessageTextElement = document.querySelector('[winning-message-text]
 const restartButton = document.getElementById("restartButton")
 const timer = document.getElementById('timer')
 
+var time_amount = 3
+var time
+
 let oTurn
 
-startGame()
-
-var time_amount = 3
-
-var time = setInterval(() => {
-    if(time_amount == 0) {
-        timer.innerText = `Player ${oTurn ? "X" : "O"} 's Turn!`
-        swapTurns()
-        setBoardHoverClass()
-    }else{
-        if(time_amount < 10){
-            time_amount = 0 + '' + time_amount
-        }
-
-        timer.innerText = '00:' + time_amount
-        time_amount -= 1;
-    }
-}, 1000)
-
-function stopTime(){
-    clearInterval(time)
-}
+startButton.addEventListener('click', startGame)
 
 restartButton.addEventListener('click', startGame)
 
+
+function startTime(){
+    time = setInterval(() => {
+        if(time_amount == 0) {
+            timer.innerText = `Player ${oTurn ? "X" : "O"} 's Turn!`
+            swapTurns()
+            setBoardHoverClass()
+        }else{
+            if(time_amount < 10){
+                time_amount = 0 + '' + time_amount
+            }
+    
+            timer.innerText = '00:' + time_amount
+            time_amount -= 1;
+        }
+    }, 1000)
+}
+
+
+function stopTime(){
+    clearInterval(time)
+    time_amount = 3;
+}
+
 function startGame(){
+    stopTime()
+    startTime()
+    startScreen.remove('show')
+
     oTurn = false
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
@@ -53,9 +65,8 @@ function startGame(){
         cell.removeEventListener('click', handleClick)
         cell.addEventListener('click', handleClick, { once: true })
     })
-
     setBoardHoverClass()
-
+    timer.classList.add('show')
     winningMessageElement.classList.remove('show')
 }
 
